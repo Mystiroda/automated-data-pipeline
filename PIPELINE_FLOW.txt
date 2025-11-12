@@ -1,0 +1,103 @@
+AUTOMATED DATA PIPELINE - EXECUTION FLOW
+=========================================
+
+1. DATA DOWNLOAD
+   --------------
+   Input: URL or dataset name (titanic/iris)
+   Process:
+     - Download CSV from URL
+     - Save to data/raw/
+     - Load into pandas DataFrame
+   Output: Raw CSV file, DataFrame
+
+2. DATA CLEANING
+   --------------
+   Input: Raw DataFrame
+   Process:
+     - Remove duplicate rows
+     - Clean column names (strip, lowercase, underscore)
+     - Handle missing values:
+        * Numeric: fill with median
+        * Categorical: fill with mode
+     - Save cleaned data
+   Output: Cleaned CSV in data/processed/, Cleaned DataFrame
+
+3. DATABASE STORAGE
+   -----------------
+   Input: Cleaned DataFrame
+   Process:
+     - Connect to SQLite database (data/pipeline.db)
+     - Create table from DataFrame
+     - Store data with proper table name
+     - Verify data integrity
+   Output: SQLite table, Database connection
+
+4. DATA ANALYSIS
+   --------------
+   Input: Cleaned DataFrame
+   Process:
+     - Generate descriptive statistics
+     - Calculate correlations
+     - Analyze categorical variables
+     - Detect patterns and insights
+     - Save analysis reports
+   Output: Analysis results (JSON/CSV), Summary insights
+
+5. VISUALIZATION
+   --------------
+   Input: Cleaned DataFrame
+   Process:
+     - Create distribution plots for numeric columns
+     - Generate correlation heatmap
+     - Create categorical count plots
+     - Save all plots as PNG files
+   Output: Visualization files in outputs/plots/
+
+6. REPORTING
+   ----------
+   Input: All previous outputs
+   Process:
+     - Generate execution summary
+     - Create pipeline report
+     - Log all activities
+   Output: Pipeline report, Log file
+
+SUPPORTED DATASETS
+==================
+- titanic: Titanic passenger survival data
+- iris: Iris flower measurement data
+- Any CSV URL: Custom datasets via URL
+
+FILE STRUCTURE
+==============
+automated-data-pipeline/
+├── data/
+│   ├── raw/           # Original downloaded data
+│   ├── processed/     # Cleaned data
+│   └── pipeline.db    # SQLite database
+├── outputs/
+│   ├── plots/         # Generated visualizations
+│   └── reports/       # Analysis reports
+├── src/               # Source code modules
+├── main.py            # Main pipeline script
+├── test_pipeline.py   # Test suite
+├── verify_database.py # Database verification
+└── requirements.txt   # Python dependencies
+
+ERROR HANDLING
+==============
+- Network errors during download
+- Invalid CSV format
+- Database connection issues
+- Missing values handling
+- Plot generation failures
+
+LOG FILES
+=========
+- pipeline.log: Detailed execution log
+- Console output: Progress updates
+
+EXECUTION TIME
+==============
+Typical execution: 10-30 seconds
+Depends on dataset size and network speed
