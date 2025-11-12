@@ -1,0 +1,33 @@
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+env/
+venv/
+*.sqlite3
+*.db
+
+# Data and outputs
+data/raw/*
+data/processed/*
+outputs/plots/*
+outputs/reports/*
+pipeline.log
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# IDE and system files
+.idea/
+.vscode/
+.DS_Store
+Thumbs.db
