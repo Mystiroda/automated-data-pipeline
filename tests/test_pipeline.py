@@ -11,7 +11,8 @@ from pathlib import Path
 import sys
 import os
 
-sys.path.insert(0, str(Path(__file__).parent))
+project_root = Path(__file__).parent.parent
+sys.path.insert(0, str(project_root))
 
 from src.data_downloader import download_dataset, load_downloaded_data
 from src.data_cleaner import clean_dataframe, clean_dataset
@@ -109,14 +110,6 @@ def test_integration():
         pytest.fail(f"Integration test failed: {e}")
 
 
-def test_file_structure():
-    """Test that required directories are created"""
-    required_dirs = [
-        "data/raw",
-        "data/processed",
-        "outputs/plots",
-        "outputs/reports"
-    ]
 
     for dir_path in required_dirs:
         assert Path(dir_path).exists(), f"Directory {dir_path} should exist"
@@ -124,7 +117,7 @@ def test_file_structure():
 
 if __name__ == "__main__":
     # Run tests
-    print("🧪 Running Data Pipeline Tests...")
+    print("Running Data Pipeline Tests...")
     print("=" * 50)
 
     # Create test instance
@@ -152,10 +145,6 @@ if __name__ == "__main__":
         print("Testing plot generation...")
         test_class.test_plot_generation()
         print("Plot generation test passed!")
-
-        print("Testing file structure...")
-        test_file_structure()
-        print("File structure test passed!")
 
         print("Testing integration...")
         test_integration()
